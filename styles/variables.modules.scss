@@ -1,0 +1,32 @@
+$black : #000;
+$white : #FFF;
+$darkGrey : #282929;
+$lightGrey : #D8D8D8;
+$wtnBlue : #21B3D3;
+$greyBorder : #C4C4C4;
+$greyText : #777;
+$greyIcon : #CCC;
+$background : #E5E5E5;
+
+//Map of breakpoint value
+$breakpoints: (
+  xs: 360px, // smaller device
+  s: 768px, // small device
+  m: 1024px, // tablet device
+  tab: 1025px, // middle device
+  l: 1200px // large device
+);
+
+$breakpoints-xs: map-get($breakpoints, 'xs');
+$breakpoints-s: map-get($breakpoints, 's');
+$breakpoints-m: map-get($breakpoints, 'm');
+$breakpoints-tab: map-get($breakpoints, 'tab');
+$breakpoints-l: map-get($breakpoints, 'l');
+
+//Mixin breakpoint
+@mixin breakpoint($bp, $rule: min-width) {
+  $bdValue: if($rule == 'max-width', #{map-get($breakpoints, $bp) - 1}, #{map-get($breakpoints, $bp)});
+  @media screen and (#{$rule}: #{$bdValue}) {
+    @content;
+  }
+}

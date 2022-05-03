@@ -1,0 +1,308 @@
+@import "./variables.modules";
+
+.main {
+  background: $background;
+}
+
+.header {
+  .columns {
+    height: 60px;
+    display: grid;
+    grid-template-columns: 80% 20%;
+
+    @include breakpoint(m) {
+      grid-template-columns: 85% 15%;
+    }
+
+    .columnLeft {
+      background-color: $black;
+      display: grid;
+      grid-template-columns: 75% 25%;
+      padding: 0 15px 0 5px;
+      align-items: center;
+      height: 60px;
+      border-right: 1px solid $white;
+
+      @include breakpoint(m) {
+        grid-template-columns: 260px 70px;
+      }
+  
+      .logoText {
+        color: $wtnBlue;
+        font-size: 9px;
+        margin: 0;
+    
+        @include breakpoint(m) {
+          font-size: 16px;
+        }
+      }
+    
+      .logo {
+        text-transform: uppercase;
+        color: $white;
+        font-size: 20px;
+        margin: 0;
+      }
+    
+      .newMsg {
+        &Container {
+          background-color: $wtnBlue;
+          color: $white;
+          display: flex;
+          align-items: center;
+          padding: 5px 10px;
+        }
+    
+        &Icon {
+          background-color: $white;
+          -webkit-mask: url("../public/empty-mail.svg") no-repeat center;
+          mask: url("../public/empty-mail.svg") no-repeat center;
+          height: 25px;
+          width: 25px;
+          mask-size: contain;
+          display: block;
+          margin-right: 10px;
+        }
+
+        &Number {
+          margin: 0;
+        }
+      }
+    }
+  
+    .columnRight {
+      background-color: $darkGrey;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+  
+      .admin {
+        &Link {
+          display: flex;
+          align-items: center;
+        }
+
+        &Letter {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-transform: uppercase;
+          color: $black;
+          background-color: $lightGrey;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+        }
+
+        &NameDesktop {
+          color: $white;
+          font-size: 13px;
+          margin-left: 10px;
+        }
+      }
+  
+      .arrow {
+        border: solid $white;
+        border-width: 0 1px 1px 0;
+        display: inline-block;
+        padding: 3px;
+        transform: rotate(45deg);
+        margin-left: 10px;
+      }
+    }
+  }
+
+  &Text {
+    font-size: 9px;
+    color: $white;
+    background-color: $wtnBlue;
+    margin: 0;
+    padding: 1px 2px;
+    width: 100%;
+  }
+
+  .admins {
+    width: 160px;
+    position: absolute;
+    top: 60px;
+    background-color: $white;
+    right: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid $greyBorder;
+    margin: 0;
+
+    .admin {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid $greyBorder;
+      padding: 0 10px;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      &Avatar {
+        border-radius: 50%;
+      }
+
+      &Name {
+        font-size: 12px;
+        margin: 10px 0 10px 10px;
+      }
+    }
+  }
+}
+
+.icon {
+  background-color: $black;
+
+  &.phone {
+    -webkit-mask: url("../public/icon-phone.svg") no-repeat center;
+    mask: url("../public/icon-phone.svg") no-repeat center;
+    width: 25px;
+    height: 25px;
+    display: block;
+    mask-size: contain;
+  }
+
+  &.email {
+    -webkit-mask: url("../public/icon-mail-notRead.svg") no-repeat center;
+    mask: url("../public/icon-mail-notRead.svg") no-repeat center;
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  &.sms {
+    -webkit-mask: url("../public/icon-sms.svg") no-repeat center;
+    mask: url("../public/icon-sms.svg") no-repeat center;
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+}
+
+.msgContainer {
+  .listMsgs {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: $white;
+    width: 25%;
+
+    .msg {
+      $namespace: &;
+      border-bottom: 1px solid $greyBorder;
+      padding: 15px 10px;
+
+      &.msgRead {
+        .msgNames {
+          font-weight: 100;
+        }
+
+        .msgResume,
+        .msgDate {
+          color: $greyText
+        }
+
+        .icon {
+          background-color: $greyIcon;
+        }
+      }
+
+      &Grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 10px;
+      }
+
+      &Names {
+        font-size: 18px;
+        margin: 0;
+        font-weight: 700;
+      }
+
+      &Resume {
+        font-size: 14px;
+        color: $greyText;
+        width: 230px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        margin: 5px 0 0;
+      }
+
+      &Date {
+        font-size: 14px;
+      } 
+    }
+  }
+}
+
+.detailsMsg {
+  background-color: $background;
+  padding: 5px;
+  height: calc(100vh - 73px);
+
+  &Header {
+    background-color: $white;
+    border: 1px solid #E3E3E3;
+    padding: 15px 20px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+
+  &Names {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &Tel {
+    color: $wtnBlue;
+  }
+
+  &Container {
+    background-color: $white;
+    border: 1px solid #E3E3E3;
+    padding: 15px 20px;
+    border-radius: 3px;
+  }
+
+  &Head {
+    display: flex;
+    grid-gap: 10px;
+  }
+
+  &Email {
+    margin: 5px 0;
+  }
+
+  &Date {
+    font-size: 12px;
+    color: #8A8989;
+  }
+
+  &Body {
+    color: $greyText;
+    font-size: 13px;
+  }
+
+  &BackBtn {
+    height: 67px;
+    width: 173px;
+    border: 1px solid $wtnBlue;
+    background: #CEF0FF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #0B7D96;
+    display: block;
+    margin: 10px 0 0 auto;
+  }
+}
