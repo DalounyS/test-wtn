@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import listMsg from '../styles/Home.module.scss';
@@ -6,7 +5,9 @@ import listMsg from '../styles/Home.module.scss';
 export default function Sidebar(data) {
   const [messages, setMessages] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [isRead, setIsRead] = useState(false);
 
+  // call api to get admin's all messages
   useEffect(() => {
     if(!data.user) {
       return;
@@ -17,27 +18,28 @@ export default function Sidebar(data) {
         (result) => {
           setMessages(result);
           setLoading(false);
+          setIsRead(false);
         }
       )
-  }, [data.user]);
+  }, [data.user, isRead]);
 
+  // do a patch to update message status
   const handleIsRead = async (id, messageId) => {
-    console.log("in", messageId)
     await fetch(`http://localhost:8080/customers/${id}/messages/${messageId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({read : true})
-    });
+    }).then(setIsRead(true));
   }
   
   return (
     <div className={listMsg.msgContainer}>
       {isLoading ? (
         <div className={listMsg.loader}></div>
-      ) :
-        <ul className={listMsg.listMsgs}>
+          ) : messages ? (
+          <ul className={listMsg.listMsgs}>
             {messages.map(message => (
               <li className={`${listMsg.msg} ${message.read ? listMsg.msgRead : ""}`} key={message.id}> 
                 <Link href={{
@@ -65,7 +67,9 @@ export default function Sidebar(data) {
               </li>
             ))}
         </ul>
-      }
+      ) : (
+        <div className={listMsg.listMsgs}><p>Vous n'avez pas de messages.</p></div>
+      )}
     </div>
   )
 }

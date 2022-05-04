@@ -9,19 +9,7 @@ export default function Home() {
 				<meta name="description" content="Wethenew - CRM" />
 			</Head>
 
-			<main className={styles.main}>
-				<ul>
-					<li>
-						<div className={styles.msgIcon}></div>
-						<div className={styles.msgContainer}>
-							<h2 className={styles.msgName}></h2>
-							<p className={styles.msgTypes}></p>
-							<p className={styles.msgPhoneDuration}></p>
-						</div>
-						<p className={styles.msgDate}></p>
-					</li>
-				</ul>
-			</main>
+			<h2 className={styles.welcomeText}>Bienvenue sur la plateforme service client.</h2>
 		</div>
 	)
 }

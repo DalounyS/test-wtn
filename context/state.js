@@ -16,8 +16,6 @@ export const NewContextProvider = props => {
       )
   }, []);
 
-  console.log("myy", data)
-
   return (
     <NewContext.Provider value={data}>
       {props.children}

@@ -6,7 +6,6 @@ import { useMediaQuery } from 'react-responsive';
 
 export default function Message() {
   const router = useRouter();
-
   const [message, setMessage] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute:'numeric' };
@@ -14,9 +13,8 @@ export default function Message() {
 
   const isDesktop = useMediaQuery({query: '(min-width: 1024px)'})
   
-  // call API to get all messages
+  // call API to get detail message
   useEffect(() => {
-    console.log("message", messageId)
     if(!id && !messageId) {
       return;
     }
@@ -29,8 +27,6 @@ export default function Message() {
         }
       )
   }, [messageId]);
-
-  console.log(message)
   
   return (
     <div>
@@ -62,7 +58,12 @@ export default function Message() {
           {!isDesktop && <div className={msg.btnContainer}><button className={msg.detailsMsgBackBtn} onClick={() => router.back()}>Revenir à la liste</button></div>}
         </div>
         ) : (
-          <p>Impossible d'afficher le message</p>
+          <div className={msg.detailsMsg}>
+            {isDesktop && <Sidebar user={id} />}
+            <div className={msg.detailsMsgContent}>
+              <p>Impossible d'afficher le message</p>
+            </div>
+          </div>
         )}
     </div>
   )

@@ -1,5 +1,5 @@
 import header from '../styles/Home.module.scss';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,13 +10,14 @@ export default function Header(props) {
   const [adminInfos, setAdminInfos] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const router = useRouter();
-  const {id} = router.query;
+  const {id, messageId} = router.query;
   const isDesktop = useMediaQuery({query: '(min-width: 1024px)'})
 
   function toggleMenu(){
     setShowMenu(!showMenu);
   }
 
+  // get all admins for the menu
   useEffect(() => {
     if(!id) {
       return;
@@ -30,9 +31,7 @@ export default function Header(props) {
           setShowMenu(false);
         }
       )
-  }, [id]);
-
-  console.log("admin", adminInfos)
+  }, [id, messageId]);
 
   return (
     <>
@@ -41,7 +40,7 @@ export default function Header(props) {
           <div className={header.columnLeft}>
             <div className={header.logoContainer}>
               <p className={header.logoText}>ADMIN Customers</p>
-              <p className={header.logo}>WETHENEW</p>
+              <h1 className={header.logo}>WETHENEW</h1>
             </div>
             {adminInfos ?
               <div className={header.newMsgContainer}>
